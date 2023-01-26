@@ -9,10 +9,10 @@ import java.util.Collection;
 import java.util.Random;
 
 @Service
-public class JavaQuestionService implements QuestionService {
+public class MathQuestionService implements QuestionService {
     private final QuestionRepository repository;
 
-    public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository repository) {
+    public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository repository) {
         this.repository = repository;
     }
 
