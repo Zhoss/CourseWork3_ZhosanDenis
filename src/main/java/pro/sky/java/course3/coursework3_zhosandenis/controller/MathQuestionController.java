@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 import pro.sky.java.course3.coursework3_zhosandenis.model.Question;
 import pro.sky.java.course3.coursework3_zhosandenis.service.QuestionService;
 
@@ -36,8 +37,8 @@ public class MathQuestionController {
         return this.service.getAll();
     }
 
-    @ExceptionHandler(value = IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException e) {
+    @ExceptionHandler(value = ResponseStatusException.class)
+    public ResponseEntity<String> handleResponseStatusException(ResponseStatusException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
