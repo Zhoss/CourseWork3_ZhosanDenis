@@ -13,16 +13,16 @@ import pro.sky.java.course3.coursework3_zhosandenis.service.QuestionService;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/exam/java")
-public class JavaQuestionController {
+@RequestMapping("/exam/math")
+public class MathQuestionController {
     private final QuestionService service;
 
-    public JavaQuestionController(@Qualifier("javaQuestionService") QuestionService service) {
+    public MathQuestionController(@Qualifier("mathQuestionService") QuestionService service) {
         this.service = service;
     }
 
     @GetMapping("/add")
-    public Question addQuestion(@RequestParam String question,@RequestParam String answer) {
+    public Question addQuestion(@RequestParam String question, @RequestParam String answer) {
         return this.service.add(question, answer);
     }
 

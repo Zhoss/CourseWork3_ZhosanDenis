@@ -20,45 +20,45 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyString;
 
 @ExtendWith(MockitoExtension.class)
-class JavaQuestionServiceTest {
+class MathQuestionServiceTest {
     @Mock
-    private QuestionRepository javaQuestionRepositoryMock;
+    private QuestionRepository mathQuestionRepositoryMock;
     private QuestionService out;
 
-    private final Question question1 = new Question("Что означает ООП?", "Объектно-ориентированное программирование");
-    private final Question question2 = new Question("Основные концепции в Java?", "Инкапсуляция, наследование, полиморфизм");
-    private final Question question3 = new Question("Какие два класса не наследуются от Object?", "Все классы в Java наследуются от Object");
-    private final Question question4 = new Question("С каким модификатором доступа данные видны только внутри класса, где они объявлены?", "Private");
-    private final Question question5 = new Question("За что отвечают типы данных в левой и правой части при создании объекта?", "Тип данных в левой части отвечает за методы, которые будут у объекта, а тип данных в правой части за реализацию этих методов");
+    private final Question question1 = new Question("Каким словом обозначался миллион в Древней Руси?", "Тьма");
+    private final Question question2 = new Question("Как называется сотая часть числа?", "Процент");
+    private final Question question3 = new Question("Назовите единицу массы драгоценных камней", "Карат");
+    private final Question question4 = new Question("Другое название независимой переменной", "Аргумент");
+    private final Question question5 = new Question("Как называется функция, графиком которой является парабола?", "Квадратичная");
 
     @BeforeEach
     public void initOut() {
-        out = new JavaQuestionService(javaQuestionRepositoryMock);
+        out = new MathQuestionService(mathQuestionRepositoryMock);
     }
 
     @Test
     void add() {
-        when(javaQuestionRepositoryMock.add(question1.getQuestion(), question1.getAnswer())).thenReturn(question1);
+        when(mathQuestionRepositoryMock.add(question1.getQuestion(), question1.getAnswer())).thenReturn(question1);
 
         Assertions.assertEquals(question1, out.add(question1.getQuestion(), question1.getAnswer()));
 
-        verify(javaQuestionRepositoryMock, times(1)).add(question1.getQuestion(), question1.getAnswer());
+        verify(mathQuestionRepositoryMock, times(1)).add(question1.getQuestion(), question1.getAnswer());
     }
 
     @Test
     void addQuest() {
-        when(javaQuestionRepositoryMock.add(eq(question1))).thenReturn(question1);
+        when(mathQuestionRepositoryMock.add(eq(question1))).thenReturn(question1);
 
         Assertions.assertEquals(question1, out.add(question1));
 
-        verify(javaQuestionRepositoryMock, times(1)).add(question1);
+        verify(mathQuestionRepositoryMock, times(1)).add(question1);
     }
 
     @Test
     void shouldThrowExceptionWhenRepositoryThrowsExceptionsAddingIncorrectInput() {
-        when(javaQuestionRepositoryMock.add(any())).thenThrow(IllegalArgumentException.class);
-        when(javaQuestionRepositoryMock.add(null, null)).thenThrow(IllegalArgumentException.class);
-        when(javaQuestionRepositoryMock.add(anyString(), anyString())).thenThrow(IllegalArgumentException.class);
+        when(mathQuestionRepositoryMock.add(any())).thenThrow(IllegalArgumentException.class);
+        when(mathQuestionRepositoryMock.add(null, null)).thenThrow(IllegalArgumentException.class);
+        when(mathQuestionRepositoryMock.add(anyString(), anyString())).thenThrow(IllegalArgumentException.class);
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> out.add(null));
         Assertions.assertThrows(IllegalArgumentException.class, () -> out.add(null, null));
@@ -68,16 +68,16 @@ class JavaQuestionServiceTest {
 
     @Test
     void remove() {
-        when(javaQuestionRepositoryMock.remove(eq(question1))).thenReturn(question1);
+        when(mathQuestionRepositoryMock.remove(eq(question1))).thenReturn(question1);
 
         Assertions.assertEquals(question1, out.remove(question1));
 
-        verify(javaQuestionRepositoryMock, times(1)).remove(question1);
+        verify(mathQuestionRepositoryMock, times(1)).remove(question1);
     }
 
     @Test
     void shouldThrowExceptionWhenRepositoryThrowsExceptionsRemovingIncorrectInput() {
-        when(javaQuestionRepositoryMock.remove(any())).thenThrow(IllegalArgumentException.class);
+        when(mathQuestionRepositoryMock.remove(any())).thenThrow(IllegalArgumentException.class);
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> out.remove(null));
     }
@@ -91,7 +91,7 @@ class JavaQuestionServiceTest {
         questionSet.add(question4);
         questionSet.add(question5);
 
-        when(javaQuestionRepositoryMock.getAll()).thenReturn(questionSet);
+        when(mathQuestionRepositoryMock.getAll()).thenReturn(questionSet);
 
         Assertions.assertEquals(questionSet, out.getAll());
     }
@@ -100,7 +100,7 @@ class JavaQuestionServiceTest {
     void getRandomQuestionIsNotNull() {
         Set<Question> questionSet = new HashSet<>(Set.of(question1));
 
-        when(javaQuestionRepositoryMock.getAll()).thenReturn(questionSet);
+        when(mathQuestionRepositoryMock.getAll()).thenReturn(questionSet);
 
         Question randomQuestion = out.getRandomQuestion();
 
